@@ -1,4 +1,4 @@
-# Fetch Api Project : GO-BLOG
+# authentication-app-express
 
 This README provides detailed instructions to install, build, and run the backend project using Docker and locally.
 
