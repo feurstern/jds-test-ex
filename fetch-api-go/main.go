@@ -38,5 +38,5 @@ func main() {
 		secured.GET("/claims", claims.GetClaim)
 	}
 
-	router.Run("localhost:8181")
+	router.Run(":8181")
 }
