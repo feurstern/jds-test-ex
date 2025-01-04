@@ -116,6 +116,25 @@ Ensure the `.env` file is located in the project root directory.
 
 ---
 
+---
+
+## API
+1. **Fetch Product**
+   Post ->  http://localhost:8181/api/products
+
+   ![image](https://github.com/user-attachments/assets/da411e68-650d-4c96-907c-c905392adf8c)
+
+2. **aggregate product**
+   Post-> http://localhost:8181/api/products/aggregate
+   
+   ![image](https://github.com/user-attachments/assets/9b665bb2-2c70-404f-9467-e56dd092a118)
+
+   
+
+  
+
+---
+
 ## Project Structure
 
 ```
