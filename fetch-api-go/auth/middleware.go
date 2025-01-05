@@ -18,11 +18,10 @@ func init() {
 	}
 
 	jwtKeySecret = os.Getenv("JWT_KEY_SECRET")
-
 }
 
 func ValidateJWT() gin.HandlerFunc {
-	fmt.Println("jwtkeySecret", jwtKeySecret)
+	fmt.Println("jwtKeySecret:", jwtKeySecret)
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
@@ -32,6 +31,7 @@ func ValidateJWT() gin.HandlerFunc {
 		}
 
 		tokenStr := authHeader[len("Bearer "):]
+
 		token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("unexpected signing method")
@@ -41,6 +41,14 @@ func ValidateJWT() gin.HandlerFunc {
 
 		if err != nil || !token.Valid {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+			c.Abort()
+			return
+		}
+
+		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+			c.Set("claims", claims)
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid claims"})
 			c.Abort()
 			return
 		}

@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4"
 )
 
 func ClaimsRoutes(router *gin.Engine) {
@@ -13,6 +12,11 @@ func ClaimsRoutes(router *gin.Engine) {
 }
 
 func GetClaim(c *gin.Context) {
-	claims := c.MustGet(os.Getenv("JWT_KEY_SECRET")).(jwt.MapClaims)
-	c.JSON(http.StatusOK, claims)
+	claims, ok := c.Get(os.Getenv("JWT_KEY_SECRET"))
+	if !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "No claims found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"claims": claims})
 }
