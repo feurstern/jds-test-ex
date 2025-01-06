@@ -10,7 +10,7 @@ Before starting, ensure you have the following installed:
 
 - [Docker](https://docs.docker.com/get-docker/) (version 20.10 or higher recommended)
 - [Docker Compose](https://docs.docker.com/compose/install/) (version 1.29 or higher recommended)
-- Go (if running locally) - [Download Go](https://golang.org/dl/)
+- Bun/Node (if running locally) - [Download bun](https://bun.sh/docs/installation)
 
 ---
 
